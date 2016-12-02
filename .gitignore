@@ -1,0 +1,23 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.eml
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+/opentsp-configuration/config-repo/**/*.*
+opentsp-platform/opentsp-poi/opentsp-poi-core/src/main/resources/config/application-local.properties
+opentsp-gateway/opentsp-gateway-web/src/main/resources/config/application-local.properties
