@@ -7,6 +7,7 @@ import com.terminal.func.GenerateTerminalData;
 import com.terminal.mbean.IoAcceptorStat;
 import com.terminal.netty.NettyClientHandler;
 import com.terminal.netty.NettyClientServer;
+import com.terminal.service.TestService;
 import com.terminal.util.ConfigUtils;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class SampleController {
     @Autowired
     private IoAcceptorStat ioAcceptorStat;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> test() {
         return Collections.singletonMap("message", this.testService.getTestMessage());
@@ -168,7 +169,7 @@ public class SampleController {
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/test2", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> olleh(@Validated Message message) {
         Map<String, Object> model = new LinkedHashMap<String, Object>();

@@ -81,6 +81,8 @@ public class ConfigUtils {
     private boolean terminalAuth;
     @Value("${terminal.location.data}")
     private boolean terminalLocationData;
+    @Value("${terminal.register.data}")
+    private boolean terminalRegisterData;
 
 
     @Value("${command.expireTime.5:5}")
@@ -94,6 +96,13 @@ public class ConfigUtils {
     @Value("${pressure.time.minute:30}")
     private int pressureTime;
 
+    public boolean isTerminalRegisterData() {
+        return terminalRegisterData;
+    }
+
+    public void setTerminalRegisterData(boolean terminalRegisterData) {
+        this.terminalRegisterData = terminalRegisterData;
+    }
 
     public boolean isTerminalLocationData() {
         return terminalLocationData;
@@ -102,6 +111,7 @@ public class ConfigUtils {
     public void setTerminalLocationData(boolean terminalLocationData) {
         this.terminalLocationData = terminalLocationData;
     }
+
     public int getPressureTime() {
         return pressureTime;
     }

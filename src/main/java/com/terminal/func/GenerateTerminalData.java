@@ -150,7 +150,7 @@ public class GenerateTerminalData {
                         long terminalId = cacheManager.getTerminals()[i];
                         TerminalStatus status = cacheManager.getTerminalCache().get(terminalId);
                         String auth = status.getTerminalAuthCode();
-                        if (configUtils.isTerminalAuth()) {
+                        if (configUtils.isTerminalAuth()) {//注册鉴权位置数据
                             if (auth == null || auth.equals("")) {
                                 if (!status.isCancel() && configUtils.getTerminalCancel() == 1) {
                                     terminalCancel(terminalId);
@@ -164,26 +164,23 @@ public class GenerateTerminalData {
                                     generateLocationAndHeartbeateData(terminalId, status);
                                 }
                             }
-                        } else if (configUtils.isTerminalLocationData()) {
+                        } else if (configUtils.isTerminalLocationData()) {//仅位置数据
                             generateLocationAndHeartbeateData(terminalId, status);
-                        } else {
+                        } else if (configUtils.isTerminalRegisterData()) {//仅注册数据
                             terminalRegister(terminalId);
-                            /*if (auth == null || auth.equals("")) {
+                        } else {
+                            if (auth == null || auth.equals("")) {
                                 if (!status.isCancel() && configUtils.getTerminalCancel() == 1) {
                                     terminalCancel(terminalId);
                                 } else {
                                     terminalRegister(terminalId);
                                 }
                             } else {
-                                if (!status.isAuth()) {
-                                    terminalAuth(terminalId, status);
-                                }
-                            }*/
+                                //if (!status.isAuth()) {
+                                terminalAuth(terminalId, status);
+                                // }
+                            }
                         }
-                        //if (i % configUtils.getTerminalBatchNumber() == 0) {
-                        //if (i % (end - 1) == 0) {
-                        //Thread.sleep(configUtils.getTerminalBatchInterval());
-                        //}
                     }
                     s++;
                     b = LocalDateTime.now().isBefore(afterInterval);

@@ -1,4 +1,4 @@
-package com.terminal.web;
+package com.terminal.service;
 
 import org.springframework.stereotype.Component;
 
