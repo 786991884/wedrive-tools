@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Highcharts Example</title>
+    <script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"/>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"/>
+    <script src="http://cdn.hcharts.cn/highstock/highstock.js"/>
+    <script src="http://cdn.hcharts.cn/highmaps/highmaps.js"/>
+    <div id="container" style="min-width:400px;height:400px"></div>
+    <div class="message"></div>
+    <script type="text/javascript">
+        var zero = [];
+        $.getJSON('/api/v1/?format=json', function (json) {
+            $.each(json, function (key, val) {
+                zero.push(val.temperature);
+            })
+        });
+        $(document).ready(function () {
+            setInterval("drawTemp();", 5000);
+        });
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -9,13 +9,12 @@ import com.terminal.netty.NettyClientHandler;
 import com.terminal.netty.NettyClientServer;
 import com.terminal.service.TestService;
 import com.terminal.util.ConfigUtils;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.NumberFormat;
@@ -156,20 +155,83 @@ public class SampleController {
     }
 
 
-    @RequestMapping(value = "/sendReveiveRate", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendReveiveChart", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> sendReveiveRate() {
-        Map<String, Object> model = new LinkedHashMap<String, Object>();
-        //model.put("发包速率", Math.ceil(Double.parseDouble(RateStatistics.sendResult)) + "/s");
+    public Map<String, Object> sendReveiveChart(@RequestParam(required = false, defaultValue = "1") Integer s) {
+        Map<String, Object> model = new LinkedHashMap<>();
+        //model.put("发包速率", Math.ceil(Double.parseDString, Objectouble(RateStatistics.sendResult)) + "/s");
         //model.put("读包速率", Math.ceil(Double.parseDouble(RateStatistics.readResult)) + "/s");
-        model.put("发包速率", RateStatistics.sendResult1s + "/s");
-        model.put("读包速率", RateStatistics.readResult1s + "/s");
+        if (s == 1) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_1);
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_1);
+        } else if (s == 2) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_2);
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_2);
+        } else if (s == 3) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_3);
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_3);
+        } else if (s == 5) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_5);
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_5);
+        } else if (s == 10) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_10);
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_10);
+        }
         model.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         return model;
     }
 
 
-    @RequestMapping(value = "/test2", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendChart", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> sendChart(@RequestParam(required = false, defaultValue = "1") Integer s) {
+        Map<String, Object> model = new LinkedHashMap<>();
+        if (s == 1) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_1);
+        } else if (s == 2) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_2);
+        } else if (s == 3) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_3);
+        } else if (s == 5) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_5);
+        } else if (s == 10) {
+            model.put("发包速率每" + s + "s统计", RateStatistics.chartMap_10);
+        }
+        model.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        return model;
+    }
+
+    @RequestMapping(value = "/reveiveChart", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> reveiveChart(@RequestParam(required = false, defaultValue = "1") Integer s) {
+        Map<String, Object> model = new LinkedHashMap<>();
+        if (s == 1) {
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_1);
+        } else if (s == 2) {
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_2);
+        } else if (s == 3) {
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_3);
+        } else if (s == 5) {
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_5);
+        } else if (s == 10) {
+            model.put("读包速率每" + s + "s统计", RateStatistics.chartMapS_10);
+        }
+        model.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        return model;
+    }
+
+   /* @RequestMapping(value = "/test3", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> chart( Message message) {
+        Map<String, Object> model = new LinkedHashMap<String, Object>();
+        model.put("message", message.getValue());
+        model.put("title", "Hello Home");
+        model.put("date", new Date());
+        return model;
+    }
+*/
+
+    /*@RequestMapping(value = "/test2", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> olleh(@Validated Message message) {
         Map<String, Object> model = new LinkedHashMap<String, Object>();
@@ -185,7 +247,7 @@ public class SampleController {
         throw new IllegalArgumentException("Server error");
     }
 
-    protected static class Message {
+    private static class Message {
 
         @NotBlank(message = "Message value cannot be empty")
         private String value;
@@ -197,6 +259,6 @@ public class SampleController {
         public void setValue(String value) {
             this.value = value;
         }
-    }
+    }*/
 
 }
